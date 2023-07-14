@@ -7,15 +7,15 @@ pipeline {
                 sh 'mvn clean install'
             }
         }
-        stage('SonarQube') {
+        stage('Test') {
             steps {
-                echo 'Running Sonarqube...'
+                echo 'Testing...'
                 sh 'sonar-scanner'
             }
         }
-        stage('Artifactory') {
+        stage('Deploy') {
             steps {
-                echo 'Uploading artifacts to Artifactory...'
+                echo 'Deploying...'
                 sh 'jfrog rt upload'
             }
         }
