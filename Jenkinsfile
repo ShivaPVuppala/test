@@ -3,12 +3,20 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'javac HelloWorld.java'
+                echo 'Building...'
+                sh 'mvn clean install'
             }
         }
-        stage('Run') {
+        stage('Test') {
             steps {
-                sh 'java HelloWorld'
+                echo 'Testing...'
+                sh 'sonar-scanner'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying...'
+                sh 'jfrog rt upload'
             }
         }
     }
